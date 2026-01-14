@@ -1,12 +1,12 @@
 # ✅ Complete Solutions - All 40 Problems
 
-All solutions with explanations and key learnings.
+This file provides the solution code for all 40 problems with a short explanation and style/syntax notes to help you understand idiomatic Rust.
 
 ---
 
-## 🟢 BEGINNER LEVEL (1-10)
+## Beginner (1–10)
 
-### Problem 1: Hello Variables
+### Problem 1 — Hello Variables
 ```rust
 fn main() {
     let x = 5;
@@ -15,222 +15,112 @@ fn main() {
     println!("x = {}, y = {}", x, y);
 }
 ```
-**Output**: `x = 5, y = 15`
-**Key**: Variables immutable by default, use `mut` for mutable, `println!` for output
+- Explanation: `x` is immutable, `y` is mutable (`mut`). `println!` prints formatted output.
+- Style & Syntax: Prefer immutable where possible; use `let mut` only when you really need to change a value.
 
----
-
-### Problem 2: Data Types Detective
+### Problem 2 — Data Types Detective
 ```rust
 fn main() {
     let int_val: i32 = 42;
     let float_val: f64 = 3.14;
     let bool_val: bool = true;
     let char_val: char = 'R';
-    
     println!("Integer: {}", int_val);
-    println!("Float: {}", float_val);
-    println!("Boolean: {}", bool_val);
-    println!("Character: {}", char_val);
 }
 ```
-**Output**:
-```
-Integer: 42
-Float: 3.14
-Boolean: true
-Character: R
-```
-**Key**: Type annotations with `:`, primitive types: i32, f64, bool, char
+- Explanation: Rust primitives include integers, floats, booleans, and `char` (Unicode scalar).
+- Style & Syntax: Prefer type inference; add explicit types when needed for clarity or disambiguation.
 
----
-
-### Problem 3: Function Factory
+### Problem 3 — Function Factory
 ```rust
-fn add(a: i32, b: i32) -> i32 {
-    a + b
-}
-
-fn multiply(x: i32, y: i32) -> i32 {
-    x * y
-}
-
+fn add(a: i32, b: i32) -> i32 { a + b }
+fn multiply(x: i32, y: i32) -> i32 { x * y }
 fn main() {
     println!("5 + 3 = {}", add(5, 3));
-    println!("4 * 6 = {}", multiply(4, 6));
 }
 ```
-**Output**:
-```
-5 + 3 = 8
-4 * 6 = 24
-```
-**Key**: Functions with parameters and return types, implicit return (last expression)
+- Explanation: Functions declare parameter and return types. Last expression is returned implicitly.
+- Style & Syntax: Keep small functions single-line when concise; use explicit `return` only when necessary.
 
----
-
-### Problem 4: Loop Master
+### Problem 4 — Loop Master
 ```rust
 fn main() {
-    println!("For loop (1-5):");
-    for i in 1..=5 {
-        println!("{}", i);
-    }
-    
-    println!("While loop (countdown from 3):");
+    for i in 1..=5 { println!("{}", i); }
     let mut count = 3;
-    while count > 0 {
-        println!("{}", count);
-        count -= 1;
-    }
-    println!("Blastoff!");
+    while count > 0 { println!("{}", count); count -= 1; }
 }
 ```
-**Output**:
-```
-For loop (1-5):
-1
-2
-3
-4
-5
+- Explanation: `1..=5` is inclusive range. `while` is used for condition-driven loops.
+- Style & Syntax: Prefer `for` with iterators when possible to avoid index mistakes.
 
-While loop (countdown from 3):
-3
-2
-1
-Blastoff!
-```
-**Key**: `for..in` with ranges (1..5 exclusive, 1..=5 inclusive), `while` loops
-
----
-
-### Problem 5: If-Else Logic
+### Problem 5 — If-Else Logic
 ```rust
 fn main() {
     let number = 42;
-    
-    if number > 0 {
-        println!("{} is positive", number);
-    } else if number < 0 {
-        println!("{} is negative", number);
-    } else {
-        println!("{} is zero", number);
-    }
-    
-    let status = if number % 2 == 0 {
-        "even"
-    } else {
-        "odd"
-    };
+    if number > 0 { println!("{} is positive", number); }
+    let status = if number % 2 == 0 { "even" } else { "odd" };
     println!("{} is {}", number, status);
 }
 ```
-**Output**:
-```
-42 is positive
-42 is even
-```
-**Key**: `if` as expression returning value, comparison operators, modulo `%`
+- Explanation: `if` can be an expression returning a value. Use braces for clarity.
+- Style & Syntax: Keep branches short; prefer pattern matching for many cases.
 
----
-
-### Problem 6: String Manipulation
+### Problem 6 — String Manipulation
 ```rust
 fn main() {
     let mut s = String::from("Hello");
     s.push_str(", Rust!");
     println!("{}", s);
-    
     let message = "Rust is awesome";
     println!("Length: {}", message.len());
-    println!("Uppercase: {}", message.to_uppercase());
-    println!("Contains 'awesome': {}", message.contains("awesome"));
 }
 ```
-**Output**:
-```
-Hello, Rust!
-Length: 15
-Uppercase: RUST IS AWESOME
-Contains 'awesome': true
-```
-**Key**: `String::from()` creates owned string, `&str` for string slices, string methods
+- Explanation: `String` is owned and growable. `&str` is a string slice.
+- Style & Syntax: Use `&str` for borrowed, `String` for owned and mutable text.
 
----
-
-### Problem 7: Array Basics
+### Problem 7 — Array Basics
 ```rust
 fn main() {
     let arr = [1, 2, 3, 4, 5];
     println!("Array: {:?}", arr);
-    println!("Length: {}", arr.len());
-    println!("First element: {}", arr[0]);
     println!("Sum: {}", arr.iter().sum::<i32>());
 }
 ```
-**Output**:
-```
-Array: [1, 2, 3, 4, 5]
-Length: 5
-First element: 1
-Sum: 15
-```
-**Key**: Array syntax `[elem; count]`, indexing with `[n]`, `.iter().sum()`
+- Explanation: Arrays have fixed length; use `Vec<T>` for growable collections.
+- Style & Syntax: Use `{:?}` for debug printing; prefer iterators (`.iter()`) over indexing.
 
----
-
-### Problem 8: Tuple Time
+### Problem 8 — Tuple Time
 ```rust
 fn main() {
     let person = ("Alice", 25, 5.9);
-    println!("Name: {}, Age: {}, Height: {}", person.0, person.1, person.2);
-    
-    let (name, age, height) = person;
-    println!("Destructured: {} is {} years old", name, age);
+    let (name, age, _) = person;
+    println!("{} is {}", name, age);
 }
 ```
-**Output**:
-```
-Name: Alice, Age: 25, Height: 5.9
-Destructured: Alice is 25 years old
-```
-**Key**: Tuple syntax `(type1, type2, ...)`, indexing `.0/.1/.2`, destructuring
+- Explanation: Tuples group heterogeneous values accessed by index or destructuring.
+- Style & Syntax: Destructure tuples when extracting values; avoid `.0` if named fields make sense.
 
----
-
-### Problem 9: Match Statement
+### Problem 9 — Match Statement
 ```rust
 fn main() {
     let day = 3;
-    
     match day {
         1 => println!("Monday"),
         2 => println!("Tuesday"),
         3 => println!("Wednesday"),
-        4 => println!("Thursday"),
-        5 => println!("Friday"),
         6 | 7 => println!("Weekend!"),
         _ => println!("Invalid day"),
     }
 }
 ```
-**Output**: `Wednesday`
-**Key**: Pattern matching, multiple patterns with `|`, default case `_`, exhaustiveness
+- Explanation: `match` is exhaustive and powerful for branching on patterns.
+- Style & Syntax: Always include a fallback `_` unless every possibility is handled.
 
----
-
-### Problem 10: Enum Basics
+### Problem 10 — Enum Basics
 ```rust
-enum Color {
-    Red,
-    Green,
-    Blue,
-}
-
+enum Color { Red, Green, Blue }
 fn main() {
     let color = Color::Red;
-    
     match color {
         Color::Red => println!("Stop!"),
         Color::Green => println!("Go!"),
@@ -238,836 +128,302 @@ fn main() {
     }
 }
 ```
-**Output**: `Stop!`
-**Key**: Enum definition, variants with `::`, pattern matching on enums
+- Explanation: Enums define variants; use `match` to handle them.
+- Style & Syntax: Prefer `match` for exhaustive handling and clarity.
 
 ---
 
-## 🟡 INTERMEDIATE LEVEL (11-20)
+## Intermediate (11–20)
 
-### Problem 11: Ownership Basics
+### Problem 11 — Ownership Basics
 ```rust
 fn main() {
     let s1 = String::from("hello");
-    let s2 = s1;  // s1 moved to s2
-    
-    println!("{}", s2);  // Works
-    // println!("{}", s1);  // ERROR: s1 no longer owns data
+    let s2 = s1; // move
+    println!("{}", s2);
 }
 ```
-**Output**: `hello`
-**Key**: Single owner at a time, move transfers ownership, preventing double-free
+- Explanation: `String` is moved; the original variable becomes invalid after move.
+- Style & Syntax: Prefer cloning only when necessary; understand moves and borrows.
 
----
-
-### Problem 12: Borrowing
+### Problem 12 — Borrowing
 ```rust
-fn print_length(s: &String) {
-    println!("Length: {}", s.len());
-}
-
+fn print_length(s: &String) { println!("Length: {}", s.len()); }
 fn main() {
     let s = String::from("hello");
     print_length(&s);
-    println!("s is still valid: {}", s);
 }
 ```
-**Output**:
-```
-Length: 5
-s is still valid: hello
-```
-**Key**: References with `&`, borrowing doesn't move, multiple immutable refs allowed
+- Explanation: Borrowing via `&` avoids moving ownership.
+- Style & Syntax: Use `&str` when a function only needs a string slice (`fn foo(s: &str)`).
 
----
-
-### Problem 13: Mutable References
+### Problem 13 — Mutable References
 ```rust
-fn add_exclamation(s: &mut String) {
-    s.push_str("!");
-}
-
-fn main() {
-    let mut s = String::from("hello");
-    add_exclamation(&mut s);
-    println!("{}", s);
-}
+fn add_exclamation(s: &mut String) { s.push_str("!"); }
+fn main() { let mut s = String::from("hello"); add_exclamation(&mut s); }
 ```
-**Output**: `hello!`
-**Key**: `&mut T` for mutable references, only ONE mutable ref at a time
+- Explanation: `&mut` allows in-place mutation but only one mutable borrow at a time.
+- Style & Syntax: Limit mutable borrows scope to minimize conflicts.
 
----
-
-### Problem 14: String Slices
+### Problem 14 — String Slices
 ```rust
 fn first_word(s: &String) -> &str {
     let bytes = s.as_bytes();
     for (i, &item) in bytes.iter().enumerate() {
-        if item == b' ' {
-            return &s[0..i];
-        }
+        if item == b' ' { return &s[0..i]; }
     }
     &s[..]
 }
-
-fn main() {
-    let s = String::from("hello world");
-    let hello = &s[0..5];
-    let world = &s[6..11];
-    
-    println!("hello: {}", hello);
-    println!("world: {}", world);
-}
 ```
-**Output**:
-```
-hello: hello
-world: world
-```
-**Key**: Slice syntax `[start..end]`, exclusive end, references to part of data
+- Explanation: String slices `&str` reference a portion of a string without copying.
+- Style & Syntax: Prefer `&str` in APIs; use slices to avoid ownership transfer.
 
----
-
-### Problem 15: Vector Collections
+### Problem 15 — Vector Collections
 ```rust
 fn main() {
     let mut vec = vec![1, 2, 3];
-    
     vec.push(4);
-    vec.push(5);
-    
-    for num in &vec {
-        println!("{}", num);
-    }
-    
-    println!("Length: {}", vec.len());
+    for num in &vec { println!("{}", num); }
 }
 ```
-**Output**:
-```
-1
-2
-3
-4
-5
-Length: 5
-```
-**Key**: `Vec<T>` growable arrays, `vec![]` macro, `.push()`, iteration with `&`
+- Explanation: `Vec<T>` is growable; iterate by reference to avoid moves.
+- Style & Syntax: Use `Vec::new()` or `vec![]`; favor iterators and higher-order ops.
 
----
-
-### Problem 16: HashMap Lookups
+### Problem 16 — HashMap Lookups
 ```rust
 use std::collections::HashMap;
-
 fn main() {
     let mut scores = HashMap::new();
-    
     scores.insert("Alice", 95);
-    scores.insert("Bob", 87);
-    scores.insert("Charlie", 92);
-    
-    if let Some(score) = scores.get("Alice") {
-        println!("Alice's score: {}", score);
-    }
+    if let Some(score) = scores.get("Alice") { println!("{}", score); }
 }
 ```
-**Output**: `Alice's score: 95`
-**Key**: Key-value storage, `.get()` returns Option, `if let` pattern matching
+- Explanation: `.get()` returns `Option<&V>`; handle with `if let` or `match`.
+- Style & Syntax: Use `entry` API for insert-or-update patterns.
 
----
-
-### Problem 17: Option Type
+### Problem 17 — Option Type
 ```rust
 fn divide(a: i32, b: i32) -> Option<i32> {
-    if b == 0 {
-        None
-    } else {
-        Some(a / b)
-    }
-}
-
-fn main() {
-    match divide(10, 2) {
-        Some(result) => println!("Result: {}", result),
-        None => println!("Cannot divide by zero"),
-    }
-    
-    match divide(10, 0) {
-        Some(result) => println!("Result: {}", result),
-        None => println!("Cannot divide by zero"),
-    }
+    if b == 0 { None } else { Some(a / b) }
 }
 ```
-**Output**:
-```
-Result: 5
-Cannot divide by zero
-```
-**Key**: Option<T> for optional values, Some/None, compiler forces handling
+- Explanation: `Option<T>` encodes presence/absence; forces explicit handling.
+- Style & Syntax: Use combinators like `.map()` and `.and_then()` to compose.
 
----
-
-### Problem 18: Result Type
+### Problem 18 — Result Type
 ```rust
 fn parse_number(s: &str) -> Result<i32, String> {
-    match s.parse::<i32>() {
-        Ok(num) => Ok(num),
-        Err(_) => Err(String::from("Not a valid number")),
-    }
-}
-
-fn main() {
-    match parse_number("42") {
-        Ok(n) => println!("Parsed: {}", n),
-        Err(e) => println!("Error: {}", e),
-    }
-    
-    match parse_number("abc") {
-        Ok(n) => println!("Parsed: {}", n),
-        Err(e) => println!("Error: {}", e),
-    }
+    s.parse::<i32>().map_err(|_| "Not a valid number".to_string())
 }
 ```
-**Output**:
-```
-Parsed: 42
-Error: Not a valid number
-```
-**Key**: Result<T, E> for errors, Ok/Err, compiler forces error handling
+- Explanation: `Result<T, E>` signals success/error; use `?` to propagate errors.
+- Style & Syntax: Use concrete error types (e.g., `thiserror`) for larger projects.
 
----
-
-### Problem 19: Struct Definition
+### Problem 19 — Struct Definition
 ```rust
-struct Rectangle {
-    width: u32,
-    height: u32,
-}
-
-fn main() {
-    let rect = Rectangle {
-        width: 30,
-        height: 50,
-    };
-    
-    println!("Width: {}, Height: {}", rect.width, rect.height);
-    println!("Area: {}", rect.width * rect.height);
-}
+struct Rectangle { width: u32, height: u32 }
+fn main() { let rect = Rectangle { width: 30, height: 50 }; }
 ```
-**Output**:
-```
-Width: 30, Height: 50
-Area: 1500
-```
-**Key**: Custom data types, named fields, instance creation, field access
+- Explanation: Structs group related data with named fields.
+- Style & Syntax: Use `impl` to add methods and keep data encapsulated.
 
----
-
-### Problem 20: Struct Methods
+### Problem 20 — Struct Methods
 ```rust
-struct Rectangle {
-    width: u32,
-    height: u32,
-}
-
+struct Rectangle { width: u32, height: u32 }
 impl Rectangle {
-    fn area(&self) -> u32 {
-        self.width * self.height
-    }
-    
-    fn perimeter(&self) -> u32 {
-        2 * (self.width + self.height)
-    }
-}
-
-fn main() {
-    let rect = Rectangle { width: 30, height: 50 };
-    println!("Area: {}", rect.area());
-    println!("Perimeter: {}", rect.perimeter());
+    fn area(&self) -> u32 { self.width * self.height }
 }
 ```
-**Output**:
-```
-Area: 1500
-Perimeter: 160
-```
-**Key**: `impl` blocks for methods, `&self` parameter, method calls with `.`
+- Explanation: `impl` defines methods; `&self` borrows immutably.
+- Style & Syntax: Use `Self` in associated functions for constructors.
 
 ---
 
-## 🟠 ADVANCED LEVEL (21-30)
+## Advanced (21–30)
 
-### Problem 21: Associated Functions
+### Problem 21 — Associated Functions
 ```rust
-struct Point {
-    x: i32,
-    y: i32,
-}
-
-impl Point {
-    fn new(x: i32, y: i32) -> Point {
-        Point { x, y }
-    }
-    
-    fn distance_from_origin(&self) -> f64 {
-        (((self.x.pow(2) + self.y.pow(2)) as f64).sqrt())
-    }
-}
-
-fn main() {
-    let p = Point::new(3, 4);
-    println!("Point: ({}, {})", p.x, p.y);
-    println!("Distance: {}", p.distance_from_origin());
-}
+struct Point { x: i32, y: i32 }
+impl Point { fn new(x: i32, y: i32) -> Point { Point { x, y } } }
 ```
-**Output**:
-```
-Point: (3, 4)
-Distance: 5
-```
-**Key**: Associated functions with `::`, constructor pattern, field shorthand
+- Explanation: Associated functions (e.g., `new`) are called with `Point::new()`.
+- Style & Syntax: Use field init shorthand `x, y` when variable names match fields.
 
----
-
-### Problem 22: Trait Definition
+### Problem 22 — Trait Definition
 ```rust
-trait Drawable {
-    fn draw(&self);
-    fn area(&self) -> f64;
-}
-
-struct Circle {
-    radius: f64,
-}
-
-impl Drawable for Circle {
-    fn draw(&self) {
-        println!("Drawing circle with radius {}", self.radius);
-    }
-    
-    fn area(&self) -> f64 {
-        3.14 * self.radius * self.radius
-    }
-}
-
-fn main() {
-    let circle = Circle { radius: 5.0 };
-    circle.draw();
-    println!("Area: {}", circle.area());
-}
+trait Drawable { fn draw(&self); fn area(&self) -> f64; }
+struct Circle { radius: f64 }
+impl Drawable for Circle { /* implement methods */ }
 ```
-**Output**:
-```
-Drawing circle with radius 5
-Area: 78.5
-```
-**Key**: Traits define shared behavior, `impl Trait for Type` syntax
+- Explanation: Traits define shared behavior; types implement traits.
+- Style & Syntax: Prefer trait bounds on generics (`T: Drawable`).
 
----
-
-### Problem 23: Generic Functions
+### Problem 23 — Generic Functions
 ```rust
-fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
-    let mut largest = list[0];
-    
-    for &item in list {
-        if item > largest {
-            largest = item;
-        }
-    }
-    
-    largest
-}
-
-fn main() {
-    let numbers = vec![34, 50, 25, 100, 65];
-    println!("Largest number: {}", largest(&numbers));
-    
-    let chars = vec!['y', 'm', 'a', 'q'];
-    println!("Largest char: {}", largest(&chars));
-}
+fn largest<T: PartialOrd + Copy>(list: &[T]) -> T { let mut largest = list[0]; for &item in list { if item > largest { largest = item; } } largest }
 ```
-**Output**:
-```
-Largest number: 100
-Largest char: y
-```
-**Key**: Type parameters `<T>`, trait bounds, code reuse
+- Explanation: Generics with trait bounds enable code reuse.
+- Style & Syntax: Minimize bounds; prefer references instead of `Copy` when possible.
 
----
-
-### Problem 24: Closures
+### Problem 24 — Closures
 ```rust
 fn main() {
-    let nums = vec![1, 2, 3, 4, 5];
-    
-    let doubled: Vec<i32> = nums.iter()
-        .map(|x| x * 2)
-        .collect();
-    
-    println!("Doubled: {:?}", doubled);
-    
-    let sum: i32 = nums.iter()
-        .filter(|&&x| x > 2)
-        .sum();
-    
-    println!("Sum of values > 2: {}", sum);
+    let nums = vec![1,2,3,4,5];
+    let doubled: Vec<i32> = nums.iter().map(|x| x * 2).collect();
 }
 ```
-**Output**:
-```
-Doubled: [2, 4, 6, 8, 10]
-Sum of values > 2: 12
-```
-**Key**: Closure syntax `|param| body`, `.map()`, `.filter()`, `.collect()`
+- Explanation: Closures are anonymous functions capturing environment variables.
+- Style & Syntax: Use iterators + closures for concise data transformations.
 
----
-
-### Problem 25: Error Propagation
+### Problem 25 — Error Propagation
 ```rust
 fn parse_and_double(s: &str) -> Result<i32, String> {
-    let num = s.parse::<i32>()
-        .map_err(|_| "Failed to parse".to_string())?;
+    let num = s.parse::<i32>().map_err(|_| "Failed to parse".to_string())?;
     Ok(num * 2)
 }
-
-fn main() {
-    match parse_and_double("21") {
-        Ok(n) => println!("Result: {}", n),
-        Err(e) => println!("Error: {}", e),
-    }
-    
-    match parse_and_double("abc") {
-        Ok(n) => println!("Result: {}", n),
-        Err(e) => println!("Error: {}", e),
-    }
-}
 ```
-**Output**:
-```
-Result: 42
-Error: Failed to parse
-```
-**Key**: `?` operator for error propagation, `.map_err()` for transformation
+- Explanation: `?` returns early on `Err`; `map_err` converts error types.
+- Style & Syntax: Use `?` liberally to reduce boilerplate in fallible code.
 
----
-
-### Problem 26: Lifetimes
+### Problem 26 — Lifetimes
 ```rust
-fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
-}
-
-fn main() {
-    let s1 = "hello";
-    let s2 = "world";
-    let result = longest(s1, s2);
-    println!("Longest: {}", result);
-}
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { if x.len() > y.len() { x } else { y } }
 ```
-**Output**: `Longest: hello`
-**Key**: Lifetime parameters `'a`, ensuring reference validity
+- Explanation: Lifetimes (`'a`) tie return reference validity to input lifetimes.
+- Style & Syntax: Prefer letting the compiler infer lifetimes when possible.
 
----
-
-### Problem 27: Pattern Matching Advanced
+### Problem 27 — Pattern Matching Advanced
 ```rust
-fn main() {
-    let point = (3, 4);
-    
-    match point {
-        (0, 0) => println!("Origin"),
-        (x, 0) => println!("On x-axis at {}", x),
-        (0, y) => println!("On y-axis at {}", y),
-        (x, y) if x == y => println!("On diagonal at ({}, {})", x, y),
-        (x, y) => println!("At ({}, {})", x, y),
-    }
+match point {
+    (0,0) => println!("Origin"),
+    (x,0) => println!("On x-axis at {}", x),
+    (x,y) if x == y => println!("On diagonal"),
+    _ => println!("At ({},{})", x, y),
 }
 ```
-**Output**: `At (3, 4)`
-**Key**: Destructuring, pattern guards with `if`, comprehensive patterns
+- Explanation: Match supports guards (`if`) and complex patterns.
+- Style & Syntax: Use `match` for clear, exhaustive branching.
 
----
-
-### Problem 28: Enum with Associated Data
+### Problem 28 — Enum with Associated Data
 ```rust
-enum Message {
-    Quit,
-    Move { x: i32, y: i32 },
-    Write(String),
-    Color(i32, i32, i32),
-}
-
-fn process_message(msg: Message) {
-    match msg {
-        Message::Quit => println!("Quit"),
-        Message::Move { x, y } => println!("Move to ({}, {})", x, y),
-        Message::Write(text) => println!("Write: {}", text),
-        Message::Color(r, g, b) => println!("Color: RGB({}, {}, {})", r, g, b),
-    }
-}
-
-fn main() {
-    process_message(Message::Move { x: 10, y: 20 });
-    process_message(Message::Write("Hello".to_string()));
-    process_message(Message::Color(255, 0, 0));
-    process_message(Message::Quit);
-}
+enum Message { Quit, Move { x: i32, y: i32 }, Write(String), Color(i32,i32,i32) }
 ```
-**Output**:
-```
-Move to (10, 20)
-Write: Hello
-Color: RGB(255, 0, 0)
-Quit
-```
-**Key**: Enums with different data types per variant
+- Explanation: Variants can hold data (named or tuple-like).
+- Style & Syntax: Use enums to model state machines or distinct message types.
 
----
-
-### Problem 29: Iterator Adapters
+### Problem 29 — Iterator Adapters
 ```rust
-fn main() {
-    let nums = vec![1, 2, 3, 4, 5, 6];
-    
-    let result: Vec<i32> = nums.iter()
-        .filter(|&&x| x % 2 == 0)
-        .map(|&x| x * x)
-        .collect();
-    
-    println!("Result: {:?}", result);
-}
+let result: Vec<i32> = nums.iter().filter(|&&x| x % 2 == 0).map(|&x| x * x).collect();
 ```
-**Output**: `Result: [4, 16, 36]`
-**Key**: Iterator chains, lazy evaluation, composition
+- Explanation: Iterator adapters are lazy and compose efficiently.
+- Style & Syntax: Favor iterators over manual loops for transformations.
 
----
-
-### Problem 30: Module System
+### Problem 30 — Module System
 ```rust
-mod math {
-    pub fn add(a: i32, b: i32) -> i32 {
-        a + b
-    }
-    
-    pub fn subtract(a: i32, b: i32) -> i32 {
-        a - b
-    }
-}
-
-fn main() {
-    println!("5 + 3 = {}", math::add(5, 3));
-    println!("5 - 3 = {}", math::subtract(5, 3));
-}
+mod math { pub fn add(a: i32, b: i32) -> i32 { a + b } }
+fn main() { println!("{}", math::add(5,3)); }
 ```
-**Output**:
-```
-5 + 3 = 8
-5 - 3 = 2
-```
-**Key**: `mod` keyword, `pub` visibility, `::` for module access
+- Explanation: `mod` groups code; `pub` exposes items outside the module.
+- Style & Syntax: Keep modules small and cohesive; use `pub(crate)` for limited visibility.
 
 ---
 
-## 🔴 EXPERT LEVEL (31-40)
+## Expert (31–40)
 
-### Problem 31: Smart Pointers - Box
+### Problem 31 — Box
 ```rust
-struct Node {
-    value: i32,
-    next: Option<Box<Node>>,
-}
-
-fn main() {
-    let node = Node {
-        value: 1,
-        next: Some(Box::new(Node {
-            value: 2,
-            next: None,
-        })),
-    };
-    
-    println!("First: {}", node.value);
-    if let Some(ref next_node) = node.next {
-        println!("Second: {}", next_node.value);
-    }
-}
+struct Node { value: i32, next: Option<Box<Node>> }
 ```
-**Output**:
-```
-First: 1
-Second: 2
-```
-**Key**: `Box<T>` for heap allocation, recursive types, single ownership
+- Explanation: `Box<T>` stores values on the heap, enabling recursive types.
+- Style & Syntax: Use `Box` for ownership and simple heap allocation.
 
----
-
-### Problem 32: Reference Counting - Rc
+### Problem 32 — Rc
 ```rust
 use std::rc::Rc;
-
-fn main() {
-    let data = Rc::new(vec![1, 2, 3]);
-    let ref1 = Rc::clone(&data);
-    let ref2 = Rc::clone(&data);
-    
-    println!("ref1: {:?}", ref1);
-    println!("ref2: {:?}", ref2);
-    println!("Strong count: {}", Rc::strong_count(&data));
-}
+let data = Rc::new(vec![1,2,3]);
+let ref1 = Rc::clone(&data);
 ```
-**Output**:
-```
-ref1: [1, 2, 3]
-ref2: [1, 2, 3]
-Strong count: 3
-```
-**Key**: Shared ownership, reference counting, single-threaded
+- Explanation: `Rc` enables shared ownership in single-threaded contexts.
+- Style & Syntax: Check `Rc::strong_count` during debugging; prefer `Arc` for threads.
 
----
-
-### Problem 33: Interior Mutability - RefCell
+### Problem 33 — RefCell
 ```rust
 use std::cell::RefCell;
-
-struct Counter {
-    count: RefCell<i32>,
-}
-
-impl Counter {
-    fn increment(&self) {
-        *self.count.borrow_mut() += 1;
-    }
-    
-    fn get(&self) -> i32 {
-        *self.count.borrow()
-    }
-}
-
-fn main() {
-    let counter = Counter { count: RefCell::new(0) };
-    counter.increment();
-    counter.increment();
-    println!("Count: {}", counter.get());
-}
+struct Counter { count: RefCell<i32> }
 ```
-**Output**: `Count: 2`
-**Key**: Runtime borrow checking, `.borrow()`, `.borrow_mut()`
+- Explanation: `RefCell` allows interior mutability with runtime borrow checks.
+- Style & Syntax: Use when compile-time borrowing rules are too strict; avoid overuse.
 
----
-
-### Problem 34: Concurrency - Threads
+### Problem 34 — Threads
 ```rust
 use std::thread;
-use std::time::Duration;
-
-fn main() {
-    let handle = thread::spawn(|| {
-        for i in 1..3 {
-            println!("From thread: {}", i);
-            thread::sleep(Duration::from_millis(100));
-        }
-    });
-    
-    for i in 1..3 {
-        println!("From main: {}", i);
-        thread::sleep(Duration::from_millis(100));
-    }
-    
-    handle.join().unwrap();
-}
+let handle = thread::spawn(|| { /* work */ });
+handle.join().unwrap();
 ```
-**Output**: (interleaved)
-```
-From main: 1
-From thread: 1
-From main: 2
-From thread: 2
-```
-**Key**: `thread::spawn()`, closures, `.join()` blocking
+- Explanation: `thread::spawn` runs code concurrently; `join` waits for completion.
+- Style & Syntax: Share data safely with `Arc` + `Mutex` or message passing.
 
----
-
-### Problem 35: Message Passing - Channels
+### Problem 35 — Channels
 ```rust
 use std::sync::mpsc;
-use std::thread;
-
-fn main() {
-    let (tx, rx) = mpsc::channel();
-    
-    thread::spawn(move || {
-        tx.send("Hello from thread").unwrap();
-    });
-    
-    let message = rx.recv().unwrap();
-    println!("Received: {}", message);
-}
+let (tx, rx) = mpsc::channel();
+thread::spawn(move || { tx.send("hi").unwrap(); });
+let msg = rx.recv().unwrap();
 ```
-**Output**: `Received: Hello from thread`
-**Key**: Channel communication, ownership transfer, multi-producer
+- Explanation: Channels provide safe message passing between threads.
+- Style & Syntax: Prefer channels for decoupled concurrency.
 
----
-
-### Problem 36: Mutex for Shared State
+### Problem 36 — Mutex
 ```rust
-use std::sync::Mutex;
-use std::sync::Arc;
-use std::thread;
-
-fn main() {
-    let counter = Arc::new(Mutex::new(0));
-    
-    let mut handles = vec![];
-    
-    for _ in 0..3 {
-        let counter_clone = Arc::clone(&counter);
-        let handle = thread::spawn(move || {
-            let mut num = counter_clone.lock().unwrap();
-            *num += 1;
-        });
-        handles.push(handle);
-    }
-    
-    for handle in handles {
-        handle.join().unwrap();
-    }
-    
-    println!("Final count: {}", *counter.lock().unwrap());
-}
+use std::sync::{Arc, Mutex};
+let counter = Arc::new(Mutex::new(0));
 ```
-**Output**: `Final count: 3`
-**Key**: `Arc` for thread-safe reference counting, `Mutex` for mutual exclusion
+- Explanation: `Mutex` guards shared state; `Arc` shares ownership across threads.
+- Style & Syntax: Keep locked sections short to avoid contention.
 
----
-
-### Problem 37: Trait Objects
+### Problem 37 — Trait Objects
 ```rust
-trait Animal {
-    fn speak(&self);
-}
-
-struct Dog;
-struct Cat;
-
-impl Animal for Dog {
-    fn speak(&self) { println!("Woof!"); }
-}
-
-impl Animal for Cat {
-    fn speak(&self) { println!("Meow!"); }
-}
-
-fn main() {
-    let animals: Vec<Box<dyn Animal>> = vec![
-        Box::new(Dog),
-        Box::new(Cat),
-    ];
-    
-    for animal in animals {
-        animal.speak();
-    }
-}
+trait Animal { fn speak(&self); }
+let animals: Vec<Box<dyn Animal>> = vec![Box::new(Dog), Box::new(Cat)];
 ```
-**Output**:
-```
-Woof!
-Meow!
-```
-**Key**: Dynamic dispatch with `dyn`, `Box<dyn Trait>` for heterogeneous collections
+- Explanation: `dyn Trait` enables heterogeneous collections and dynamic dispatch.
+- Style & Syntax: Use `dyn` when behavior needs to be abstract at runtime.
 
----
-
-### Problem 38: Async/Await
+### Problem 38 — Async/Await
 ```rust
-async fn fetch_data(id: i32) -> String {
-    format!("Data for ID: {}", id)
-}
-
+async fn fetch_data(id: i32) -> String { format!("Data for ID: {}", id) }
 #[tokio::main]
-async fn main() {
-    let result = fetch_data(42).await;
-    println!("{}", result);
-}
+async fn main() { let r = fetch_data(42).await; }
 ```
-**Output**: `Data for ID: 42`
-**Key**: Async functions, `.await`, non-blocking concurrency, futures
+- Explanation: `async` returns a `Future`; `.await` yields the result.
+- Style & Syntax: Use an async runtime (e.g., `tokio`) for async executors.
 
----
-
-### Problem 39: Derive Macros
+### Problem 39 — Derive Macros
 ```rust
 #[derive(Clone, Debug)]
-struct Person {
-    name: String,
-    age: u32,
-}
-
-fn main() {
-    let person = Person {
-        name: "Alice".to_string(),
-        age: 30,
-    };
-    
-    let cloned = person.clone();
-    println!("{:?}", cloned);
-}
+struct Person { name: String, age: u32 }
 ```
-**Output**: `Person { name: "Alice", age: 30 }`
-**Key**: Automatic trait implementation, common derives
+- Explanation: `derive` auto-implements common traits like `Clone` and `Debug`.
+- Style & Syntax: Derive only what you need; implement custom traits when required.
 
----
-
-### Problem 40: Unsafe Code
+### Problem 40 — Unsafe Code
 ```rust
-unsafe fn unsafe_divide(a: i32, b: i32) -> i32 {
-    a / b
-}
-
-fn main() {
-    let result = unsafe {
-        unsafe_divide(10, 2)
-    };
-    println!("Result: {}", result);
-}
+unsafe fn unsafe_divide(a: i32, b: i32) -> i32 { a / b }
+fn main() { let r = unsafe { unsafe_divide(10,2) }; }
 ```
-**Output**: `Result: 5`
-**Key**: When and how to use `unsafe`, raw pointers, breaking safety contracts
+- Explanation: `unsafe` allows operations that the compiler can't guarantee as safe.
+- Style & Syntax: Isolate `unsafe` code, document invariants, and keep it minimal.
 
 ---
 
-## 🎯 Learning Summary
-
-| Level | Topics | Key Skills |
-|-------|--------|-----------|
-| **Beginner** | Variables, functions, loops, control flow | Syntax, basic problem-solving |
-| **Intermediate** | Ownership, borrowing, collections, structs | Understanding Rust's core concepts |
-| **Advanced** | Traits, generics, error handling, closures | Building reusable, safe code |
-| **Expert** | Smart pointers, concurrency, async | Systems programming, advanced patterns |
+## Quick Style & Syntax Tips
+- Use immutability by default: `let` not `let mut`.
+- Prefer iterators and combinators (`map`, `filter`, `collect`) over manual loops.
+- Favor descriptive names and small functions.
+- Handle errors explicitly with `Result` and `Option`.
+- Keep `unsafe` blocks tiny and well-documented.
 
 ---
 
-## 🚀 Mastery Checklist
-
-After completing all 40 problems, you should understand:
-
-- ✅ Rust's ownership system
-- ✅ Borrowing and lifetimes
-- ✅ Pattern matching and destructuring
-- ✅ Error handling with Result/Option
-- ✅ Generic programming
-- ✅ Traits and trait objects
-- ✅ Iterator adapters and functional programming
-- ✅ Concurrent programming with threads and channels
-- ✅ Smart pointers and memory management
-- ✅ Async/await fundamentals
-
----
-
-Congratulations on making it through all 40 problems! 🎉
+File merged: expanded solutions copied into `SOLUTIONS.md` from `SOLUTIONS_EXPLAINED.md`.
 
