@@ -8,7 +8,6 @@ fn main() {
     let number = 42;
     
     // TODO: Use if-else to classify number as positive/negative/zero
-    
     // TODO: Use if as an expression to determine "even" or "odd"
     // Hint: if number % 2 == 0 { "even" } else { "odd" }
     

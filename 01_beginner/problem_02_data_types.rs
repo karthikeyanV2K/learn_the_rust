@@ -6,15 +6,7 @@
 
 fn main() {
     // TODO: Create these variables with type annotations:
-    let int_val: i32 = 42;
-    let float_val: f64 = 3.14;
-    let bool_val: bool = true;
-    let char_val: char = 'R';
 
-    println!("Integer: {}", int_val);
-    println!("Float: {}", float_val);
-    println!("Boolean: {}", bool_val);
-    println!("Character: {}", char_val);
 
     
     

@@ -6,6 +6,9 @@
 
 // TODO: Define Color enum with variants: Red, Green, Blue
 
+fn enum {
+    
+}
 fn main() {
     // TODO: Create a Color instance
     let color = Color::Red;

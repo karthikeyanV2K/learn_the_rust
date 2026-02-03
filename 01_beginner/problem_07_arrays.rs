@@ -6,13 +6,13 @@
 
 fn main() {
     // TODO: Create array [1, 2, 3, 4, 5]
-    let arr = [1, 2, 3, 4, 5];
+    //let arr = [1, 2, 3, 4, 5];
     
     // TODO: Print the whole array
-    // Use: println!("Array: {:?}", arr);
+  
+
     
     // TODO: Print length
-    // Use: arr.len()
     
     // TODO: Print first element
     // Use: arr[0]

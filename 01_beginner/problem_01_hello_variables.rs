@@ -10,13 +10,12 @@ fn main() {
     let x = 5;
     
     // TODO: Declare a mutable variable y with value 10
-    let mut y = 10;
+    //let mut y = 10;
     
     // TODO: Modify y by adding 5
-     y = y + 5;
     
     // TODO: Print the values
-     println!("x = {}, y = {}", x, y);
+    //println!("x = {}, y = {}", x, y);
     
     // BONUS: Try this:
     // 1. Uncomment the println! statements

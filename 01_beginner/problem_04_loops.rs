@@ -8,15 +8,11 @@ fn main() {
     // TODO: Write a for loop from 1 to 5 (inclusive)
     // Use: for i in 1..=5 { println!("{}", i); }
     
-    println!("For loop (1-5):");
-    
     // TODO: Write a while loop that counts down from 3 to 1
     // Then print "Blastoff!"
     
-    println!("While loop (countdown from 3):");
-    
     // TODO: Use an infinite loop with break
-    println!("Infinite loop until break:");
+
     
     // BONUS CHALLENGES:
     // 1. Print even numbers from 2 to 10
