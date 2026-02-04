@@ -343,40 +343,50 @@ fn main() {
                 },
                 {
                     id: 10,
-                    title: 'Enum Basics',
-                    concepts: ['Enums', 'Custom Types'],
+                    title: 'Traffic Light Control',
+                    concepts: ['Enums', 'Control Flow', 'Real-world Modeling'],
                     difficulty: '⭐⭐',
-                    starterCode: `// TODO: Define a Color enum with Red, Green, Blue variants
+                    starterCode: `// TODO: Define an enum TrafficLight with variants: Red, Yellow, Green
 
-fn main() {
-    // TODO: Create a Color::Red and match on it
-    
-}`,
-                    solution: `enum Color {
-    Red,
-    Green,
-    Blue,
+fn action(light: TrafficLight) -> &'static str {
+    // TODO: Return "Stop" for Red, "Caution" for Yellow, "Go" for Green
+    // Hint: Use a match expression
+    ""
 }
 
 fn main() {
-    let color = Color::Red;
+    // TODO: Create a variable for a Red light and print its action
     
-    match color {
-        Color::Red => println!("Stop!"),
-        Color::Green => println!("Go!"),
-        Color::Blue => println!("Cool!"),
-    }
 }`,
-                    expectedOutput: 'Stop!',
+                    solution: `enum TrafficLight {
+    Red,
+    Yellow,
+    Green,
+}
+
+fn action(light: TrafficLight) -> &'static str {
+    match light {
+        TrafficLight::Red => "Stop",
+        TrafficLight::Yellow => "Caution",
+        TrafficLight::Green => "Go",
+    }
+}
+
+fn main() {
+    let light = TrafficLight::Red;
+    println!("Signal is Red: {}", action(light));
+    println!("Signal is Green: {}", action(TrafficLight::Green));
+}`,
+                    expectedOutput: 'Signal is Red: Stop\nSignal is Green: Go',
                     explanation: [
-                        "<code>enum Color { ... }</code>: Defines an enumeration with three variants: Red, Green, and Blue.",
-                        "<code>let color = Color::Red;</code>: Instances of an enum variants are created using the scope operator <code>::</code>.",
-                        "<code>match color { ... }</code>: Using match with enums is common. It forces us to handle every variant of the enum, ensuring safety."
+                        "<code>enum TrafficLight { ... }</code>: Enums allow you to define a type by enumerating its possible variants. Perfect for state machines.",
+                        "<code>fn action(...)</code>: Takes a `TrafficLight` instance. Using an enum here guarantees we only pass valid states.",
+                        "<code>match light { ... }</code>: Rust's match is exhaustive. If we added a new light color later, the compiler would force us to update this code (safety!)."
                     ],
                     keyLearnings: [
-                        'Enum definition',
-                        'Enum variants',
-                        'Using enums with match'
+                        'Enums for type-safe state',
+                        'Exhaustive pattern matching',
+                        'Returning values from match'
                     ]
                 }
             ]
