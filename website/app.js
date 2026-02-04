@@ -260,6 +260,13 @@ function openProblem(problemId) {
     // Show modal
     DOM.modal().classList.add('active');
     document.body.style.overflow = 'hidden';
+
+    // Fix editor layout after modal transition
+    if (AppState.editor) {
+        setTimeout(() => {
+            AppState.editor.layout();
+        }, 100);
+    }
 }
 
 function closeModal() {
