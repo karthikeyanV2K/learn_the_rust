@@ -811,6 +811,11 @@ fn main() {
     println!("Distance: {}", p.distance_from_origin());
 }`,
                     expectedOutput: 'Point: (3, 4)\nDistance: 5',
+                    explanation: [
+                        "<code>impl Point { ... }</code>: Defines methods for the struct.",
+                        "<code>fn new(...) -> Point</code>: A static method (associated function) that creates a new instance. 'new' is just a convention, not a keyword.",
+                        "<code>fn distance_from_origin(&self)</code>: A method that takes <code>&self</code>. It calculates the hypotenuse using the `sqrt()` method on f64."
+                    ],
                     keyLearnings: [
                         'Associated functions use ::',
                         'new is convention for constructors',
@@ -855,6 +860,12 @@ fn main() {
     println!("Area: {}", circle.area());
 }`,
                     expectedOutput: 'Drawing circle with radius 5\nArea: 78.5',
+                    explanation: [
+                        "<code>trait Drawable { ... }</code>: Defines a set of behaviors (methods) that types must implement.",
+                        "<code>impl Drawable for Circle</code>: We explicitly implement the trait for our struct.",
+                        "<code>fn draw(&self)</code>: We must provide the code for every method defined in the trait header.",
+                        "Traits allow us to treat different types similarly if they share behavior (polymorphism)."
+                    ],
                     keyLearnings: [
                         'Trait definition with required methods',
                         'impl Trait for Type syntax',
@@ -895,6 +906,11 @@ fn main() {
     println!("Largest char: {}", largest(&chars));
 }`,
                     expectedOutput: 'Largest number: 100\nLargest char: y',
+                    explanation: [
+                        "<code>fn largest&lt;T: ...&gt;</code>: Defines a generic function working on type `T`.",
+                        "<code>T: PartialOrd + Copy</code>: Constraints (bounds). `T` must be comparable (PartialOrd) and copyable data (Copy, so we can move it out of the array).",
+                        "<code>for &item in list</code>: We iterate over references but destructure with `&` to get the value since `T` is Copy."
+                    ],
                     keyLearnings: [
                         '<T> generic type parameter',
                         'Trait bounds with :',
@@ -929,6 +945,11 @@ fn main() {
     println!("Sum of values > 2: {}", sum);
 }`,
                     expectedOutput: 'Doubled: [2, 4, 6, 8, 10]\nSum of values > 2: 12',
+                    explanation: [
+                        "<code>.map(|x| x * 2)</code>: `map` takes a closure `|x| ...` that transforms each element. Closures can capture their environment.",
+                        "<code>.collect()</code>: Transforms the iterator back into a collection (like Vec).",
+                        "<code>.filter(|&&x| x > 2)</code>: Filter keeps elements where the closure returns true. The double reference `&&x` is because iter() yields `&T`, and filter gives `&&T` to the predicate."
+                    ],
                     keyLearnings: [
                         'Closure syntax: |param| body',
                         '.map() transforms elements',
@@ -972,6 +993,12 @@ fn main() {
     }
 }`,
                     expectedOutput: 'Result: 42\nError: Failed to parse',
+                    explanation: [
+                        "<code>parse::&lt;i32&gt;()</code> Returns a <code>Result</code> type.",
+                        "<code>.map_err(...)</code>: Converts the error if it fails. Useful for unifying error types.",
+                        "<code>? operator</code>: The magic operator. If the result is `Err`, it returns immediately from the function. If `Ok`, it unwraps the value and continues.",
+                        "This makes error handling much cleaner than nested matches."
+                    ],
                     keyLearnings: [
                         '? operator returns error early',
                         '.map_err() transforms error type',
@@ -1007,6 +1034,11 @@ fn main() {
     println!("Longest: {}", result);
 }`,
                     expectedOutput: 'Longest: hello',
+                    explanation: [
+                        "<code>fn longest&lt;'a&gt;(...) -> &'a str</code>: We declare a lifetime parameter `'a`. It says that the returned reference will live at least as long as 'both' input references.",
+                        "Without this, the compiler wouldn't know if the returned reference points to `x` or `y`, leading to potential dangling pointers.",
+                        "Lifetimes don't change how code runs, only how the compiler checks safety."
+                    ],
                     keyLearnings: [
                         '\'a is a lifetime parameter',
                         'Lifetimes ensure references are valid',
@@ -1041,6 +1073,12 @@ fn main() {
     }
 }`,
                     expectedOutput: 'At (3, 4)',
+                    explanation: [
+                        "<code>match point</code>: We can destructure the tuple directly in the match arms.",
+                        "<code>(x, y) if x == y</code>: A **Match Guard**. The arm only matches if the pattern matches AND the `if` condition is true.",
+                        "<code>(0, y)</code>: Matches any point where the first coordinate is 0 (on y-axis).",
+                        "Patterns are extremely expressive in Rust."
+                    ],
                     keyLearnings: [
                         'Destructuring patterns',
                         'Pattern guards with if',
@@ -1083,6 +1121,12 @@ fn main() {
     process_message(Message::Write("Hello".to_string()));
 }`,
                     expectedOutput: 'Move to (10, 20)\nWrite: Hello',
+                    explanation: [
+                        "Enums in Rust can hold data, making them 'Sum Types' or 'Tagged Unions'.",
+                        "<code>Message::Move { x, y }</code>: This variant holds a struct-like anonymous record.",
+                        "<code>Message::Write(String)</code>: This variant holds a single String value.",
+                        "<code>match msg</code>: We can destructure the data inside the enum variants to use it."
+                    ],
                     keyLearnings: [
                         'Enum variants with associated data',
                         'Different data shapes per variant',
@@ -1111,6 +1155,12 @@ fn main() {
     println!("Result: {:?}", result);
 }`,
                     expectedOutput: 'Result: [4, 16, 36]',
+                    explanation: [
+                        "<code>nums.iter()</code>: Creates an iterator. Iterators are lazy—they don't do anything until consumed.",
+                        "<code>.filter(...)</code>: Keeps only elements satisfying the condition.",
+                        "<code>.map(...)</code>: Transforms elements.",
+                        "<code>.collect()</code>: The consumer. It drives the iterator and collects results into a vector."
+                    ],
                     keyLearnings: [
                         'Method chaining',
                         'Iterator composition',
@@ -1143,6 +1193,11 @@ fn main() {
     println!("5 - 3 = {}", math::subtract(5, 3));
 }`,
                     expectedOutput: '5 + 3 = 8\n5 - 3 = 2',
+                    explanation: [
+                        "<code>mod math { ... }</code>: Defines a module named 'math'. Modules partition code into logical units.",
+                        "<code>pub fn</code>: Functions are private by default. We must use `pub` to make them accessible outside the module.",
+                        "<code>math::add(...)</code>: We access items in the module using the scope resolution operator `::`."
+                    ],
                     keyLearnings: [
                         'mod keyword defines modules',
                         'pub makes items public',
@@ -1189,6 +1244,11 @@ fn main() {
     }
 }`,
                     expectedOutput: 'First: 1\nSecond: 2',
+                    explanation: [
+                        "<code>Box&lt;T&gt;</code>: A smart pointer that allocates data on the heap instead of the stack. Essential for recursive types.",
+                        "<code>Option&lt;Box&lt;Node&gt;&gt;</code>: The `next` field might be `None` (end of list) or `Some` pointer to the next node.",
+                        "Rust needs to know the size of types at compile time. Recursive types have infinite size, so we put them behind a pointer (Box) which has a fixed size."
+                    ],
                     keyLearnings: [
                         'Box<T> allocates on heap',
                         'Enables recursive types',
@@ -1219,6 +1279,11 @@ fn main() {
     println!("Strong count: {}", Rc::strong_count(&data));
 }`,
                     expectedOutput: 'ref1: [1, 2, 3]\nref2: [1, 2, 3]\nStrong count: 3',
+                    explanation: [
+                        "<code>Rc::new(...)</code>: Reference Counting pointer. Enables multiple owners for the same data.",
+                        "<code>Rc::clone(&data)</code>: Doesn't deep copy the data. It just assumes another 'ownership' handle and increments the counter.",
+                        "<code>Rc::strong_count(...)</code>: Shows how many active references exist. The memory is only freed when this hits zero."
+                    ],
                     keyLearnings: [
                         'Rc<T> for shared ownership',
                         '.clone() increases reference count',
@@ -1264,6 +1329,11 @@ fn main() {
     println!("Count: {}", counter.get());
 }`,
                     expectedOutput: 'Count: 2',
+                    explanation: [
+                        "<code>RefCell&lt;T&gt;</code>: Allows 'Interior Mutability'. We can mutate data even when we only have an immutable reference to the struct.",
+                        "<code>borrow_mut()</code>: Returns a mutable wrapper. If we try to borrow mutably twice at the same time, it panics at runtime.",
+                        "This bends the borrowing rules (checking at runtime instead of compile time)."
+                    ],
                     keyLearnings: [
                         'RefCell<T> for runtime borrow checking',
                         '.borrow() immutable borrow',
@@ -1303,6 +1373,11 @@ fn main() {
     handle.join().unwrap();
 }`,
                     expectedOutput: 'From main: 1\nFrom thread: 1\nFrom main: 2\nFrom thread: 2',
+                    explanation: [
+                        "<code>thread::spawn(...)</code>: Spawns a new OS-level thread. It runs concurrently with the main thread.",
+                        "<code>handle.join()</code>: Important! The main thread might finish before the spawned thread. Join forces main to wait for it.",
+                        "<code>unwrap()</code>: Handles the case where the thread panicked."
+                    ],
                     keyLearnings: [
                         'thread::spawn() creates thread',
                         '.join() waits for completion',
@@ -1337,6 +1412,12 @@ fn main() {
     println!("Received: {}", message);
 }`,
                     expectedOutput: 'Received: Hello from thread',
+                    explanation: [
+                        "<code>mpsc::channel()</code>: Multi-Producer, Single-Consumer channel. Standard way for threads to communicate.",
+                        "<code>move ||</code>: The closure takes ownership of `tx` (the sender) to use it in the thread.",
+                        "<code>rx.recv()</code>: Blocking call. Waits until a message arrives.",
+                        "This embodies the philosophy: 'Do not communicate by sharing memory; share memory by communicating.'"
+                    ],
                     keyLearnings: [
                         'mpsc::channel() creates sender/receiver',
                         '.send() sends message',
@@ -1381,6 +1462,11 @@ fn main() {
     println!("Final count: {}", *counter.lock().unwrap());
 }`,
                     expectedOutput: 'Final count: 3',
+                    explanation: [
+                        "<code>Arc&lt;Mutex&lt;T&gt;&gt;</code>: The gold standard for shared mutable state across threads.",
+                        "<code>Arc::clone</code>: Creates a new pointer to the same lock (safe to share across threads).",
+                        "<code>lock().unwrap()</code>: Acquires the lock. Blocks the thread until available. Unwrap handles 'poisoned' locks (if a thread panicked while holding it)."
+                    ],
                     keyLearnings: [
                         'Mutex<T> for mutual exclusion',
                         '.lock() acquires lock',
@@ -1426,6 +1512,11 @@ fn main() {
     }
 }`,
                     expectedOutput: 'Woof!\nMeow!',
+                    explanation: [
+                        "<code>Vec&lt;Box&lt;dyn Animal&gt;&gt;</code>: A collection of different types that all implement `Animal`.",
+                        "<code>Box&lt;dyn Trait&gt;</code>: A 'Trait Object'. It uses a vtable to look up method addresses at runtime (Dynamic Dispatch).",
+                        "This allows polymorphism similar to other OO languages, at the cost of a small runtime overhead."
+                    ],
                     keyLearnings: [
                         'dyn Trait for dynamic dispatch',
                         'Box<dyn Trait> heterogeneous collections',
@@ -1460,6 +1551,11 @@ fn main() {
     println!("{}", result);
 }`,
                     expectedOutput: 'Data for ID: 42',
+                    explanation: [
+                        "<code>async fn</code>: Syntactic sugar that returns a `Future`. The code inside doesn't run until the future is polled.",
+                        "In a real async runtime (like Tokio), `.await` yields control of the thread while waiting for I/O.",
+                        "This allows thousands of concurrent tasks on a single thread."
+                    ],
                     keyLearnings: [
                         'async functions return Future',
                         '.await waits for completion',
@@ -1494,6 +1590,12 @@ fn main() {
     println!("{:?}", cloned);
 }`,
                     expectedOutput: 'Person { name: "Alice", age: 30 }',
+                    explanation: [
+                        "<code>#[derive(...)]</code>: Procedural macros that generate code for you.",
+                        "<code>Clone</code>: Generates a `.clone()` method that calls clone on each field.",
+                        "<code>Debug</code>: Generates code to format the struct for `{:?}` printing.",
+                        "This massively reduces boilerplate code."
+                    ],
                     keyLearnings: [
                         '#[derive(Trait)] generates implementations',
                         'Common: Clone, Debug, PartialEq, Eq',
@@ -1522,6 +1624,11 @@ fn main() {
     println!("Result: {}", result);
 }`,
                     expectedOutput: 'Result: 5',
+                    explanation: [
+                        "<code>unsafe { ... }</code>: A block where we promise the compiler 'I checked the safety rules, trust me'.",
+                        "Allows: Dereferencing raw pointers, calling unsafe functions, etc.",
+                        "If we violate memory safety contracts here, Undefined Behavior (UB) occurs. Use sparingly!"
+                    ],
                     keyLearnings: [
                         'unsafe keyword disables checks',
                         'Use ONLY when necessary',
