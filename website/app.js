@@ -323,7 +323,28 @@ function resetCode() {
 
 function showSolution() {
     if (AppState.currentProblem && AppState.editor) {
+        // Set code
         AppState.editor.setValue(AppState.currentProblem.solution);
+
+        // Show explanation
+        const explanationContainer = document.getElementById('solutionExplanation');
+        const explanationContent = document.getElementById('explanationContent');
+
+        if (AppState.currentProblem.explanation) {
+            explanationContent.innerHTML = AppState.currentProblem.explanation
+                .map((item, index) => `
+                    <div class="explanation-item">
+                        <span class="explanation-line-num">${index + 1}</span>
+                        <div class="explanation-text">${item}</div>
+                    </div>
+                `).join('');
+            explanationContainer.style.display = 'block';
+        } else {
+            explanationContainer.style.display = 'none';
+        }
+
+        // Scroll layout fix
+        setTimeout(() => AppState.editor.layout(), 50);
     }
 }
 

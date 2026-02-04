@@ -31,6 +31,12 @@ const PROBLEMS = {
     println!("x = {}, y = {}", x, y);
 }`,
                     expectedOutput: 'x = 5, y = 15',
+                    explanation: [
+                        "<code>let x = 5;</code>: Defines an immutable variable <code>x</code>. In Rust, variables are immutable by default, meaning their value cannot change.",
+                        "<code>let mut y = 10;</code>: Defines a mutable variable <code>y</code> using the <code>mut</code> keyword, allowing us to modify it later.",
+                        "<code>y = y + 5;</code>: Updates the value of <code>y</code>. This is only allowed because <code>y</code> was declared as mutable.",
+                        "<code>println!(...)</code>: A macro that prints to the console. The <code>{}</code> placeholders are filled with the values of <code>x</code> and <code>y</code> in order."
+                    ],
                     keyLearnings: [
                         'Variables are immutable by default',
                         'Use `mut` for mutable variables',
@@ -62,6 +68,13 @@ const PROBLEMS = {
     println!("Character: {}", char_val);
 }`,
                     expectedOutput: 'Integer: 42\nFloat: 3.14\nBoolean: true\nCharacter: R',
+                    explanation: [
+                        "<code>let int_val: i32 = 42;</code>: Explicitly annotates the type as <code>i32</code> (32-bit signed integer).",
+                        "<code>let float_val: f64 = 3.14;</code>: Annotates as <code>f64</code> (64-bit float), which is the default for floating-point numbers.",
+                        "<code>let bool_val: bool = true;</code>: Boolean type can be <code>true</code> or <code>false</code>.",
+                        "<code>let char_val: char = 'R';</code>: Character type uses single quotes and represents a Unicode scalar value.",
+                        "<code>println!(...)</code>: We print each variable to verify its value."
+                    ],
                     keyLearnings: [
                         'i32, f64, bool, char are primitive types',
                         'Type annotations with colons',
@@ -93,6 +106,12 @@ fn main() {
     println!("4 * 6 = {}", multiply(4, 6));
 }`,
                     expectedOutput: '5 + 3 = 8\n4 * 6 = 24',
+                    explanation: [
+                        "<code>fn add(a: i32, b: i32) -> i32</code>: Defines a function named <code>add</code> taking two <code>i32</code> parameters and returning an <code>i32</code>.",
+                        "<code>a + b</code>: The body of the function. Note the lack of a semicolon <code>;</code> at the end. In Rust, the last expression in a block is implicitly returned.",
+                        "<code>fn multiply...</code>: Similarly defines a multiplication function.",
+                        "<code>add(5, 3)</code>: Calls the function with arguments 5 and 3. The result replaces the <code>{}</code> in the print statement."
+                    ],
                     keyLearnings: [
                         'Function syntax: `fn name(param: type) -> return_type`',
                         'Return values (implicit with last expression)',
@@ -130,6 +149,12 @@ fn main() {
     println!("Blastoff!");
 }`,
                     expectedOutput: 'For loop (1-5):\n1\n2\n3\n4\n5\n\nWhile loop (countdown from 3):\n3\n2\n1\nBlastoff!',
+                    explanation: [
+                        "<code>for i in 1..=5</code>: Creates a loop that iterates from 1 to 5 inclusive (<code>..=</code> syntax). If we used <code>1..5</code>, it would stop at 4.",
+                        "<code>while count > 0</code>: A classic while loop that continues as long as the condition is true.",
+                        "<code>count -= 1;</code>: Decrements the counter. Note that Rust doesn't have the <code>--</code> operator (like <code>count--</code>) found in C/C++.",
+                        "The loops print numbers sequentially to demonstrate control flow."
+                    ],
                     keyLearnings: [
                         '`for..in` loops with ranges (1..5 is exclusive, 1..=5 is inclusive)',
                         '`while` loops with conditions',
@@ -168,6 +193,12 @@ fn main() {
     println!("{} is {}", number, status);
 }`,
                     expectedOutput: '42 is positive\n42 is even',
+                    explanation: [
+                        "<code>if number > 0</code>: Standard if-else structure. Conditions in Rust don't need parentheses.",
+                        "<code>let status = if ...</code>: shows that <code>if</code> is an expression in Rust, meaning it returns a value. We verify if the number is even.",
+                        "The result of the if block ('even' or 'odd') is assigned to the <code>status</code> variable.",
+                        "This feature allows for concise conditional assignments without ternary operators."
+                    ],
                     keyLearnings: [
                         'if-else chains',
                         'if as an expression (returns value)',
@@ -195,6 +226,13 @@ fn main() {
     println!("Contains 'awesome': {}", message.contains("awesome"));
 }`,
                     expectedOutput: 'Hello, Rust!\nLength: 15\nUppercase: RUST IS AWESOME\nContains \'awesome\': true',
+                    explanation: [
+                        "<code>let mut s = String::from(...);</code>: Creates a heap-allocated, growable <code>String</code> from a literal string slice.",
+                        "<code>s.push_str(...);</code>: Appends a string slice to the String. This works because <code>s</code> is mutable.",
+                        "<code>message.len()</code>: Returns the length of the string in bytes.",
+                        "<code>message.to_uppercase()</code>: Returns a new String with all characters converted to uppercase.",
+                        "<code>message.contains(...)</code>: Checks if the string contains a substring and returns a boolean."
+                    ],
                     keyLearnings: [
                         '`String::from()` for owned strings',
                         '`&str` string slices',
@@ -219,6 +257,12 @@ fn main() {
     println!("Sum: {}", arr.iter().sum::<i32>());
 }`,
                     expectedOutput: 'Array: [1, 2, 3, 4, 5]\nLength: 5\nFirst element: 1\nSum: 15',
+                    explanation: [
+                        "<code>let arr = [1, 2, 3, 4, 5];</code>: Defines an array. In Rust, arrays have a fixed size known at compile time.",
+                        "<code>arr.len()</code>: Returns the number of elements in the array.",
+                        "<code>arr[0]</code>: Accesses the first element using 0-based indexing.",
+                        "<code>arr.iter().sum::&lt;i32&gt;()</code>: Creates an iterator over the array and sums the elements. We specify <code>&lt;i32&gt;</code> (turbofish syntax) to tell the compiler the result type."
+                    ],
                     keyLearnings: [
                         'Array syntax: [element; count]',
                         'Indexing with [n]',
@@ -245,6 +289,11 @@ fn main() {
     println!("Destructured: {} is {} years old", name, age);
 }`,
                     expectedOutput: 'Name: Alice, Age: 25, Height: 5.9\nDestructured: Alice is 25 years old',
+                    explanation: [
+                        "<code>let person = (...);</code>: Creates a tuple, which can hold values of different types (str, i32, f64).",
+                        "<code>person.0</code>, <code>person.1</code>: Accesses tuple elements by their index position using dot notation.",
+                        "<code>let (name, age, height) = person;</code>: Destructuring pattern matches the tuple elements into individual variables <code>name</code>, <code>age</code>, and <code>height</code>."
+                    ],
                     keyLearnings: [
                         'Tuple syntax: (type1, type2, type3)',
                         'Tuple indexing with .0, .1, etc.',
@@ -279,6 +328,12 @@ fn main() {
     }
 }`,
                     expectedOutput: 'Wednesday',
+                    explanation: [
+                        "<code>match day { ... }</code>: The <code>match</code> expression compares <code>day</code> against patterns specified in the arms.",
+                        "<code>1 => ...</code>: Matches if value is 1. The code after <code>=></code> is executed.",
+                        "<code>6 | 7 => ...</code>: Matches if value is 6 OR 7 (multiple patterns).",
+                        "<code>_ => ...</code>: The wildcard pattern matches anything else. Match expressions must be exhaustive in Rust, covering all possible values."
+                    ],
                     keyLearnings: [
                         '`match` expression for pattern matching',
                         'Multiple patterns with |',
@@ -313,6 +368,11 @@ fn main() {
     }
 }`,
                     expectedOutput: 'Stop!',
+                    explanation: [
+                        "<code>enum Color { ... }</code>: Defines an enumeration with three variants: Red, Green, and Blue.",
+                        "<code>let color = Color::Red;</code>: Instances of an enum variants are created using the scope operator <code>::</code>.",
+                        "<code>match color { ... }</code>: Using match with enums is common. It forces us to handle every variant of the enum, ensuring safety."
+                    ],
                     keyLearnings: [
                         'Enum definition',
                         'Enum variants',
@@ -350,6 +410,12 @@ fn main() {
     println!("{}", s2);
 }`,
                     expectedOutput: 'hello',
+                    explanation: [
+                        "<code>let s1 = String::from(...);</code>: Creates a <code>String</code> on the heap. <code>s1</code> is the owner.",
+                        "<code>let s2 = s1;</code>: This looks like a copy, but for heap data like String, it's a **move**. `s1` is no longer valid.",
+                        "<code>println!({}, s2);</code>: This works because `s2` now owns the data.",
+                        "If we tried to use `s1` again, the compiler would stop us to prevent double-free errors."
+                    ],
                     keyLearnings: [
                         'Values have one owner at a time',
                         'Move transfers ownership',
@@ -378,6 +444,11 @@ fn main() {
     println!("s is still valid: {}", s);
 }`,
                     expectedOutput: 'Length: 5\ns is still valid: hello',
+                    explanation: [
+                        "<code>fn print_length(s: &String)</code>: The function takes a reference (<code>&</code>), meaning it 'borrows' the value without taking ownership.",
+                        "<code>print_length(&s);</code>: We pass `&s` to check length. Because we only borrowed it, `s` remains valid.",
+                        "<code>println!(..., s);</code>: Since `s` wasn't moved, we can use it again here. We can have infinite immutable references."
+                    ],
                     keyLearnings: [
                         '&T creates an immutable reference',
                         'Borrowing doesn\'t move ownership',
@@ -406,6 +477,11 @@ fn main() {
     println!("{}", s);
 }`,
                     expectedOutput: 'hello!',
+                    explanation: [
+                        "<code>fn add_exclamation(s: &mut String)</code>: Takes a mutable reference (<code>&mut</code>). This allows the function to modify the value.",
+                        "<code>s.push_str(...)</code>: Modifies the underlying string directly.",
+                        "<code>add_exclamation(&mut s);</code>: We must pass a mutable reference. Note that you can only have **one** mutable reference at a time to prevent data races."
+                    ],
                     keyLearnings: [
                         '&mut T for mutable references',
                         'Only one mutable reference at a time',
@@ -432,6 +508,11 @@ fn main() {
     println!("world: {}", world);
 }`,
                     expectedOutput: 'hello: hello\nworld: world',
+                    explanation: [
+                        "<code>&s[0..5]</code>: Creates a string slice referencing bytes 0 to 4 (5 is exclusive). This is a view into the original string, not a copy.",
+                        "<code>&s[6..11]</code>: 6 (Start) is inclusive, 11 (End) is exclusive. Slices are fast and efficient.",
+                        "Trying to slice in the middle of a multi-byte character (like emoji) would cause a runtime panic."
+                    ],
                     keyLearnings: [
                         'Slice syntax: &s[start..end]',
                         'Slices are references to part of data',
@@ -463,6 +544,11 @@ fn main() {
     println!("Length: {}", vec.len());
 }`,
                     expectedOutput: '1\n2\n3\n4\n5\nLength: 5',
+                    explanation: [
+                        "<code>let mut vec = vec![...];</code>: The <code>vec!</code> macro creates a new vector. We make it mutable to add items.",
+                        "<code>vec.push(4)</code>: Adds elements to the end. The vector automatically resizes on the heap if needed.",
+                        "<code>for num in &vec</code>: We iterate over a reference to the vector. If we didn't use <code>&</code>, the loop would take ownership (move) the vector and we couldn't use it afterwards."
+                    ],
                     keyLearnings: [
                         'vec![] macro for vector creation',
                         '.push() to add elements',
@@ -495,6 +581,12 @@ fn main() {
     }
 }`,
                     expectedOutput: 'Alice\'s score: 95',
+                    explanation: [
+                        "<code>HashMap::new()</code>: Creates an empty hash map. Like vectors, maps are heap-allocated.",
+                        "<code>scores.insert(...)</code>: Adds key-value pairs. Keys and values must differ in type but be consistent within the map.",
+                        "<code>scores.get(\"Alice\")</code>: Returns an <code>Option&lt;&i32&gt;</code> because the key might not exist.",
+                        "<code>if let Some(score) = ...</code>: A concise way to handle the Option if we only care about the Some case."
+                    ],
                     keyLearnings: [
                         'HashMap::new() creates empty map',
                         '.insert(key, value) adds entries',
@@ -535,6 +627,12 @@ fn main() {
     }
 }`,
                     expectedOutput: 'Result: 5\nCannot divide by zero',
+                    explanation: [
+                        "<code>fn divide(...) -> Option&lt;i32&gt;</code>: Returns <code>Option</code> which can be <code>Some(value)</code> or <code>None</code>.",
+                        "<code>if b == 0 { None }</code>: Returns None to indicate failure (division by zero is undefined).",
+                        "<code>Some(a / b)</code>: Returns the result wrapped in Some.",
+                        "<code>match divide(...)</code>: We must handle both cases. This prevents null pointer exceptions common in other languages."
+                    ],
                     keyLearnings: [
                         'Option<T> represents Some or None',
                         'Must handle None case',
@@ -566,6 +664,12 @@ fn main() {
     }
 }`,
                     expectedOutput: 'Parsed: 42',
+                    explanation: [
+                        "<code>Result&lt;i32, String&gt;</code>: Struct used for returning and propagating errors. It returns either <code>Ok(i32)</code> or <code>Err(String)</code>.",
+                        "<code>match s.parse()</code>: Attempt to parse string to number.",
+                        "<code>Ok(num) => Ok(num)</code>: Wrap successful value in Ok.",
+                        "<code>Err(_) => Err(...)</code>: Wrap error message in Err. Rust requires explicit error handling."
+                    ],
                     keyLearnings: [
                         'Result<T, E> represents Ok or Err',
                         'Use for functions that might fail',
@@ -598,6 +702,12 @@ fn main() {
     println!("Area: {}", rect.width * rect.height);
 }`,
                     expectedOutput: 'Width: 30, Height: 50\nArea: 1500',
+                    explanation: [
+                        "<code>struct Rectangle { ... }</code>: Defines a custom data type with named fields.",
+                        "<code>let rect = Rectangle { ... };</code>: Instantiates the struct. Order of fields doesn't matter, but names must match.",
+                        "<code>rect.width</code>: Access fields using dot notation.",
+                        "Structs allow grouping related data together logically."
+                    ],
                     keyLearnings: [
                         'Struct syntax with named fields',
                         'Create instances with field initializer',
@@ -642,6 +752,12 @@ fn main() {
     println!("Perimeter: {}", rect.perimeter());
 }`,
                     expectedOutput: 'Area: 1500\nPerimeter: 160',
+                    explanation: [
+                        "<code>impl Rectangle { ... }</code>: Defines an implementation block for methods associated with the Rectangle struct.",
+                        "<code>fn area(&self)</code>: Methods take <code>&self</code> as the first parameter represents the instance.",
+                        "<code>self.width * self.height</code>: Accesses fields of the instance.",
+                        "<code>rect.area()</code>: Called using method syntax. Rust automatically handles the reference/dereference (<code>&self</code>)."
+                    ],
                     keyLearnings: [
                         'impl block for methods',
                         '&self for immutable methods',
