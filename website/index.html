@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn Rust programming with 40 interactive problems. Practice coding, run code in browser, and master Rust from beginner to expert level.">
+    <title>RustLab - Interactive Rust Learning Platform</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/editor/editor.main.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="logo">🦀</span>
+            <span class="brand-text">RustLab</span>
+        </div>
+        <div class="nav-links">
+            <a href="#problems" class="nav-link active">Problems</a>
+            <a href="#progress" class="nav-link">Progress</a>
+            <a href="https://doc.rust-lang.org/book/" target="_blank" class="nav-link">Rust Book</a>
+        </div>
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+            <span class="theme-icon">🌙</span>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🚀 40 Interactive Problems</div>
+            <h1 class="hero-title">Master <span class="gradient-text">Rust</span> Programming</h1>
+            <p class="hero-subtitle">Learn by doing. Write Rust code, run it instantly in your browser, and see execution time. From fundamentals to systems programming.</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" id="totalProblems">40</span>
+                    <span class="stat-label">Problems</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="completedCount">0</span>
+                    <span class="stat-label">Completed</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Levels</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="code-preview">
+                <div class="code-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="filename">main.rs</span>
+                </div>
+                <pre class="code-content"><code><span class="keyword">fn</span> <span class="function">main</span>() {
+    <span class="keyword">let</span> message = <span class="string">"Hello, Rustacean!"</span>;
+    <span class="macro">println!</span>(<span class="string">"{}"</span>, message);
+}</code></pre>
+            </div>
+        </div>
+    </header>
+
+    <!-- Level Navigation -->
+    <section id="problems" class="levels-section">
+        <div class="container">
+            <h2 class="section-title">Choose Your Level</h2>
+            <div class="levels-grid">
+                <button class="level-card active" data-level="beginner">
+                    <span class="level-icon">🌱</span>
+                    <h3>Beginner</h3>
+                    <p>Fundamentals</p>
+                    <span class="level-range">Problems 1-10</span>
+                    <div class="level-progress">
+                        <div class="progress-bar" id="progress-beginner" style="width: 0%"></div>
+                    </div>
+                </button>
+                <button class="level-card" data-level="intermediate">
+                    <span class="level-icon">⚡</span>
+                    <h3>Intermediate</h3>
+                    <p>Ownership & Collections</p>
+                    <span class="level-range">Problems 11-20</span>
+                    <div class="level-progress">
+                        <div class="progress-bar" id="progress-intermediate" style="width: 0%"></div>
+                    </div>
+                </button>
+                <button class="level-card" data-level="advanced">
+                    <span class="level-icon">🚀</span>
+                    <h3>Advanced</h3>
+                    <p>Generics & Traits</p>
+                    <span class="level-range">Problems 21-30</span>
+                    <div class="level-progress">
+                        <div class="progress-bar" id="progress-advanced" style="width: 0%"></div>
+                    </div>
+                </button>
+                <button class="level-card" data-level="expert">
+                    <span class="level-icon">👑</span>
+                    <h3>Expert</h3>
+                    <p>Concurrency & Unsafe</p>
+                    <span class="level-range">Problems 31-40</span>
+                    <div class="level-progress">
+                        <div class="progress-bar" id="progress-expert" style="width: 0%"></div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problems Grid -->
+    <section class="problems-section">
+        <div class="container">
+            <div class="problems-header">
+                <h2 id="levelTitle">Beginner Problems</h2>
+                <span class="problem-count" id="problemCount">10 problems</span>
+            </div>
+            <div class="problems-grid" id="problemsGrid">
+                <!-- Problems loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Editor Modal -->
+    <div class="modal" id="editorModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="problem-info">
+                    <span class="problem-badge" id="problemBadge">Problem 1</span>
+                    <h2 id="problemTitle">Hello Variables</h2>
+                    <div class="problem-meta">
+                        <span class="meta-item" id="problemDifficulty">⭐</span>
+                        <span class="meta-item" id="problemConcepts">Variables, Mutability</span>
+                    </div>
+                </div>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="editor-container">
+                    <div class="editor-section">
+                        <div class="editor-header">
+                            <span class="editor-title">📝 Code Editor</span>
+                            <div class="editor-actions">
+                                <select id="rustChannel" class="channel-select">
+                                    <option value="stable">Stable</option>
+                                    <option value="beta">Beta</option>
+                                    <option value="nightly">Nightly</option>
+                                </select>
+                                <button id="resetCode" class="btn btn-secondary">↻ Reset</button>
+                                <button id="showSolution" class="btn btn-secondary">💡 Solution</button>
+                                <button id="runCode" class="btn btn-primary">▶ Run Code</button>
+                            </div>
+                        </div>
+                        <div id="monacoEditor" class="monaco-editor-container"></div>
+                    </div>
+                    
+                    <div class="output-section">
+                        <div class="output-header">
+                            <span class="output-title">📤 Output</span>
+                            <div class="runtime-display" id="runtimeDisplay">
+                                <span class="runtime-label">⏱️ Runtime:</span>
+                                <span class="runtime-value" id="runtimeValue">--</span>
+                            </div>
+                        </div>
+                        <div class="output-content" id="outputContent">
+                            <p class="output-placeholder">Click "Run Code" to see the output...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="learning-section">
+                    <h3>📚 Key Learnings</h3>
+                    <ul id="keyLearnings" class="learnings-list">
+                        <!-- Loaded dynamically -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Section -->
+    <section id="progress" class="progress-section">
+        <div class="container">
+            <h2 class="section-title">Your Progress</h2>
+            <div class="progress-overview">
+                <div class="progress-ring-container">
+                    <svg class="progress-ring" viewBox="0 0 120 120">
+                        <circle class="progress-ring-bg" cx="60" cy="60" r="54"></circle>
+                        <circle class="progress-ring-fill" id="progressRing" cx="60" cy="60" r="54"></circle>
+                    </svg>
+                    <div class="progress-text">
+                        <span class="progress-percent" id="progressPercent">0%</span>
+                    </div>
+                </div>
+                <div class="progress-details">
+                    <div class="progress-item">
+                        <span class="progress-icon">🌱</span>
+                        <span class="progress-label">Beginner</span>
+                        <span class="progress-value" id="beginnerProgress">0/10</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-icon">⚡</span>
+                        <span class="progress-label">Intermediate</span>
+                        <span class="progress-value" id="intermediateProgress">0/10</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-icon">🚀</span>
+                        <span class="progress-label">Advanced</span>
+                        <span class="progress-value" id="advancedProgress">0/10</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-icon">👑</span>
+                        <span class="progress-label">Expert</span>
+                        <span class="progress-value" id="expertProgress">0/10</span>
+                    </div>
+                </div>
+            </div>
+            <button id="resetProgress" class="btn btn-secondary reset-btn">🗑️ Reset All Progress</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>🦀 Built with love for Rustaceans | Powered by <a href="https://play.rust-lang.org" target="_blank">Rust Playground</a></p>
+            <p class="footer-note">Free to use • No signup required • Code runs in your browser</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+    <script src="data/problems.js"></script>
+    <script src="playground.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
